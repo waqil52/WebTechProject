@@ -1,0 +1,32 @@
+<!-- <page-wrapper>
+    <div pageTitle>
+      Explore Locations
+    </div>
+    <div body>
+      <form [formGroup]="settingForm" (ngSubmit)="onSubmit()" fxLayout="column">
+        <mat-form-field appearance="outline">
+          <mat-label>Discount(%)</mat-label>
+          <input matInput formControlName="discount" type="number" max="100" min="0">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Tax(%)</mat-label>
+          <input matInput formControlName="taxPercentage" type="number" max="100" min="0">
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </page-wrapper> -->
+
+  <page-wrapper>
+    <div pageTitle>
+      Locations
+    </div>
+    <div actionPanel>
+        <button mat-raised-button color="primary" (click)="addRoomModal()">Add Location</button>
+    </div>
+    <div body class="full-width">
+      <app-location-list></app-location-list>
+    </div>
+  </page-wrapper>

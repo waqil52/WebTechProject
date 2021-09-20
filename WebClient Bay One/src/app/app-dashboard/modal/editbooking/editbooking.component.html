@@ -1,0 +1,92 @@
+<modal-wrapper>
+    <div headerText class="header-title">
+        Edit Booking
+    </div>
+    <div modalBody >
+      <form [formGroup]="bookingForm"  (ngSubmit)="onSubmit()" fxLayout="column">
+        <div fxlayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-form-field disabled appearance="outline" class="full-width">
+            <mat-label>{{booking.passengerName}}</mat-label>
+            <input matInput  formControlName="passengerId" type="text">
+        </mat-form-field>
+            <!-- <button mat-raised-button color="primary" type="button" (click)="addGuestModal()">Add New Passenger</button> -->
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-form-field>
+                <mat-label>{{booking.cabinNumber}}</mat-label>
+                <mat-select formControlName="cabinId" (selectionChange)="onRoomChange($event)" required>
+                    <mat-option *ngFor="let room of roomList | async" [value]="room.id">
+                        {{room.cabinNumber}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>From</mat-label>
+            <input matInput type="text" name="" id="">
+        </mat-form-field> -->
+        <!-- <mat-form-field appearance="outline">
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate formControlName="bookedFrom" placeholder="Start date">
+                <input matEndDate formControlName="leaveAt" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field> -->
+
+        <mat-form-field>
+          <mat-label>{{booking.departureFrom}}</mat-label>
+          <mat-select formControlName="depLocId" (selectionChange)="onLocation1($event)" required>
+              <mat-option *ngFor="let location of locationList$ | async" [value]="location.id">
+                  {{location.name}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{booking.arrivalPoint}}</mat-label>
+          <mat-select formControlName="arrivalLocId" (selectionChange)="onLocation2($event)" required>
+              <mat-option *ngFor="let location of locationList$ | async" [value]="location.id">
+                  {{location.name}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>Departure From</mat-label>
+            <input matInput formControlName="departureFrom" type="text" name="" id="">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Arrival At</mat-label>
+          <input matInput formControlName="arrivalAt" type="text" name="" id="">
+      </mat-form-field> -->
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>{{booking.departureTime}}</mat-label>
+        <input formControlName="departureTime" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Departure Time</mat-label>
+        <input matInput formControlName="departureTime" type="text" name="" id="">
+    </mat-form-field> -->
+
+
+
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>Comments</mat-label>
+            <input matInput formControlName="comments" type="text" name="" id="">
+        </mat-form-field> -->
+        <div>
+            <button mat-raised-button color="primary" type="submit">Save</button>
+        </div>
+    </form>
+    </div>
+    <div secondaryContent>
+        <!-- <button mat-stroked-button color="primary" type="button" (click)="close()">Cancel</button> -->
+    </div>
+    <!-- <button primaryButton mat-raised-button color="primary" type="submit" form="bookingEdit">Save</button> -->
+</modal-wrapper>

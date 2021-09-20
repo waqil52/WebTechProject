@@ -1,0 +1,56 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="passengerName">
+      <mat-header-cell *matHeaderCellDef> Booked By </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.passengerName}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="cabinNumber">
+      <mat-header-cell *matHeaderCellDef> Cabin </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cabinNumber}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="departureTime">
+      <mat-header-cell *matHeaderCellDef> Departure Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.departureTime | date }} </mat-cell>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="leaveAt">
+        <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.leaveAt  | date:'dd/MM/yyyy'}}</mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="departureFrom">
+        <mat-header-cell *matHeaderCellDef> Departure From </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.departureFrom}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="arrivalPoint">
+        <mat-header-cell *matHeaderCellDef> Arrival At </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.arrivalPoint}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="editBooking(element)">
+              <mat-icon>edit</mat-icon>
+              </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="deleteBooking(element)">
+              <mat-icon>delete</mat-icon>
+              </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
