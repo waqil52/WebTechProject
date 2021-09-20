@@ -60,8 +60,11 @@ namespace ShipManagement.Controllers
 
         // DELETE api/<LocationController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> UpdateLocation(long id)
         {
+            var result = await _locationService.DeleteAsycn(id);
+            return Ok(result);
+
         }
     }
 }

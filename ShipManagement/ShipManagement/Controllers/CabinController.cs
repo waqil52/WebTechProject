@@ -48,16 +48,27 @@ namespace ShipManagement.Controllers
             return Ok(result);
         }
 
+        
+
         // PUT api/<CabinController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> UpdateCabin(long id, [FromBody] CabinDto value)
         {
+            //var cabin = _mapper.Map<Cabin>(value);
+            var cabinData = await _cabinService.GetASync(id);
+            cabinData.CabinNumber = value.CabinNumber;
+            cabinData.Capacity = value.Capacity;
+            cabinData.Fare = value.Fare;
+            var result = await _cabinService.UpdateAsync(cabinData);
+            return Ok(result);
         }
 
         // DELETE api/<CabinController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> DeleteCabin(long id)
         {
+            var result = await _cabinService.DeleteAsycn(id);
+            return Ok(result);
         }
     }
 }

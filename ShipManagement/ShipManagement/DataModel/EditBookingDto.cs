@@ -14,7 +14,5 @@ namespace ShipManagement.DataModel
         public virtual long ArrivalLocId { get; set; }
         public virtual long BookingId { get; set; }
         public virtual long CabinId { get; set; }
-        public long PrevRoomId { get; set; }
-        public long NewRoomId { get; set; }
     }
 }

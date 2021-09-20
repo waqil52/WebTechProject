@@ -8,7 +8,7 @@ namespace ShipManagement.DataModel
     public class BookingDto
     {
         public DateTime Journeydate { get; set; }
-        public string DepartureTime { get; set; }
+        public DateTime DepartureTime { get; set; }
         public string NeedToArriveAt { get; set; }
         public virtual long DepLocId { get; set; }
         public virtual long ArrivalLocId { get; set; }

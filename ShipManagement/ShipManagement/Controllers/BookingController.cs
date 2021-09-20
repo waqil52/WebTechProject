@@ -50,6 +50,8 @@ namespace ShipManagement.Controllers
             var bookingInfo = _mapper.Map<BookingInfo>(booking);
             var bookingCreate = _mapper.Map<Booking>(booking);
             await _bookingService.CreateAsync(bookingInfo);
+            bookingCreate.BookingId = bookingInfo.Id;
+            bookingCreate.CabinId = booking.CabinId;
             await _bookingService.CreateBookingAsync(bookingCreate);
 
             return Ok(bookingInfo);
@@ -65,25 +67,26 @@ namespace ShipManagement.Controllers
 
         // PUT api/<BookingController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBooking(long id, [FromBody] EditBookingDto editBooking)
+        public async Task<IActionResult> UpdateBooking(long id, [FromBody] BookingDto editBooking)
         {
             var booking = await _bookingService.GetASync(id);
             booking.ArrivalLocId = editBooking.ArrivalLocId;
             booking.DepartureTime = editBooking.DepartureTime;
             booking.DepLocId = editBooking.DepLocId;
-            booking.DepartureTime = editBooking.DepartureTime;
             booking.Journeydate = editBooking.Journeydate;
             booking.NeedToArriveAt = editBooking.NeedToArriveAt;
-            await _bookingService.UpdateAsync(booking);
-            var result = await _bookingService.UpdateBooking(editBooking.PrevRoomId, editBooking.NewRoomId, editBooking.BookingId);
-            return Ok(booking);
+            booking.PassengerId = editBooking.PassengerId;
+            var result = await _bookingService.UpdateAsync(booking);
+/*            var result = await _bookingService.UpdateBooking(editBooking.PrevRoomId, editBooking.NewRoomId, editBooking.BookingId);
+*/            return Ok(result);
         }
 
         // DELETE api/<BookingController>/5
-        [HttpDelete("{bookingId}/{cabinId}")]
-        public async Task Delete(long bookingId, long cabinId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBooking(long id)
         {
-            await _bookingService.DeleteBooking(bookingId, cabinId);
+            var result = await _bookingService.DeleteAsycn(id);
+            return Ok(result);
         }
     }
 }
